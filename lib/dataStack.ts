@@ -32,9 +32,21 @@ export class DataStack extends cdk.Stack {
     table.addLocalSecondaryIndex({
       indexName: 'EventStartIndex',
       sortKey: {
-        name: 'startDate',
+        name: 'eventStartDate',
         type: dynamodb.AttributeType.STRING,
       }
+    });
+
+    table.addGlobalSecondaryIndex({
+      indexName: 'ExperienceIndex',
+      partitionKey: {
+        name: 'experienceId',
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'sk',
+        type: dynamodb.AttributeType.STRING,
+      },
     });
   }
 }
