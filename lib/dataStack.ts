@@ -44,7 +44,7 @@ export class DataStack extends cdk.Stack {
         type: dynamodb.AttributeType.STRING,
       },
       sortKey: {
-        name: 'sk',
+        name: 'eventStartDate',
         type: dynamodb.AttributeType.STRING,
       },
     });
