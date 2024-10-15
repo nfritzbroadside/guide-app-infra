@@ -29,14 +29,7 @@ export class DataStack extends cdk.Stack {
       pointInTimeRecovery: true,
     });
 
-    table.addLocalSecondaryIndex({
-      indexName: 'EventStartIndex',
-      sortKey: {
-        name: 'eventStartDate',
-        type: dynamodb.AttributeType.STRING,
-      }
-    });
-
+    // For getting all Events under an Experience
     table.addGlobalSecondaryIndex({
       indexName: 'ExperienceIndex',
       partitionKey: {
@@ -45,6 +38,19 @@ export class DataStack extends cdk.Stack {
       },
       sortKey: {
         name: 'eventStartDate',
+        type: dynamodb.AttributeType.STRING,
+      },
+    });
+
+    // For getting all Events that touch a date
+    table.addGlobalSecondaryIndex({
+      indexName: 'DailyEventIndex',
+      partitionKey: {
+        name: 'dailyEventId',
+        type: dynamodb.AttributeType.STRING,
+      },
+      sortKey: {
+        name: 'eventDate',
         type: dynamodb.AttributeType.STRING,
       },
     });
