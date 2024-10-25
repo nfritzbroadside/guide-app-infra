@@ -43,16 +43,12 @@ export class DataStack extends cdk.Stack {
     });
 
     // For getting all Events that touch a date
-    table.addGlobalSecondaryIndex({
+    table.addLocalSecondaryIndex({
       indexName: 'DailyEventIndex',
-      partitionKey: {
-        name: 'dailyEventId',
-        type: dynamodb.AttributeType.STRING,
-      },
       sortKey: {
         name: 'eventDate',
         type: dynamodb.AttributeType.STRING,
-      },
-    });
+      }
+    })
   }
 }
